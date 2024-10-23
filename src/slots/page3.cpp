@@ -40,10 +40,10 @@ void CAJ2PDF::updatePage3Progress(bool status, QString inputFilePath) {
   progressBar->setValue(progressBar->value() + 1);
   if (status) {
     statusTextBrowser->insertPlainText(
-        QString::fromStdString("✅ " + inputFilePath.toStdString() + "\n"));
+        QStringLiteral("✅ %1\n").arg(inputFilePath));
   } else {
     statusTextBrowser->insertPlainText(
-        QString::fromStdString("❌ " + inputFilePath.toStdString() + "\n"));
+        QStringLiteral("❌ %1\n").arg(inputFilePath));
   }
   page3Mutex->unlock();
 }

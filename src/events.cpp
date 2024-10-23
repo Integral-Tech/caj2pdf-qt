@@ -19,12 +19,20 @@ bool CAJ2PDF::eventFilter(QObject *object, QEvent *event) {
   if (event->type() == QEvent::EnterWhatsThisMode) {
     // 弹出一个关于本项目信息的消息框
     QMessageBox::information(
-        this, QString::fromUtf8("关于"),
-        QString::fromUtf8(
-            std::string(
-                "<h2 align=\"center\">关于本项目</h2><br><p style=\"line-height:150%\">这是一个免费开源的 CAJ 转 PDF 转换器，基于 <a href=\"https://github.com/caj2pdf/caj2pdf\">cajpdf</a> 和 <a href=\"https://mupdf.com/\">mupdf</a> 实现。<br>主页：<a href=\"https://caj2pdf-qt.sainnhe.dev\">https://caj2pdf-qt.sainnhe.dev</a><br>作者：<a href=\"mailto:i@sainnhe.dev\">Sainnhe Park</a><br>许可：<a href=\"https://github.com/sainnhe/caj2pdf-qt/blob/master/LICENSE\">GPL3</a><br>版本：<a href=\"https://caj2pdf-qt.sainnhe.dev/CHANGELOG.html\">" +
-                version + "</a></p>")
-                .c_str()));
+        this, QStringLiteral("关于"),
+        QStringLiteral(
+            "<h2 align=\"center\">关于本项目</h2><br><p "
+            "style=\"line-height:150%\">这是一个免费开源的 CAJ 转 PDF "
+            "转换器，基于 <a "
+            "href=\"https://github.com/caj2pdf/caj2pdf\">cajpdf</a> 和 <a "
+            "href=\"https://mupdf.com/\">mupdf</a> 实现。<br>主页：<a "
+            "href=\"https://caj2pdf-qt.sainnhe.dev\">https://"
+            "caj2pdf-qt.sainnhe.dev</a><br>作者：<a "
+            "href=\"mailto:i@sainnhe.dev\">Sainnhe Park</a><br>许可：<a "
+            "href=\"https://github.com/sainnhe/caj2pdf-qt/blob/master/"
+            "LICENSE\">GPL3</a><br>版本：<a "
+            "href=\"https://caj2pdf-qt.sainnhe.dev/CHANGELOG.html\">%1</a></p>")
+            .arg(QString::fromStdString(version)));
     return true;
   }
   return QObject::eventFilter(object, event);
@@ -66,9 +74,9 @@ void CAJ2PDF::dropEvent(QDropEvent *event) {
                       inputFilesVec.end());
   inputFiles = inputFilesVec.toList();
   // 更新文本框
-  QString inputFilesText = tr("");
+  QString inputFilesText;
   for (QString str : inputFiles) {
-    inputFilesText = inputFilesText + str + "\n";
+    inputFilesText += str + "\n";
   }
   inputTextBrowser->setText(inputFilesText);
   outputTextBrowser->setText(inputFilesText);

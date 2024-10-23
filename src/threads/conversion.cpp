@@ -48,9 +48,9 @@ void ConversionThread::run() {
                            .filePath(QString::fromStdString(outputFileName));
   // 执行命令，成功返回 0
   QProcess process;
-  QStringList args = {QString::fromUtf8("convert"), inputFilePath,
-                      QString::fromUtf8("-o"),      outputFile,
-                      QString::fromUtf8("-m"),      mutoolExecutablePath};
+  QStringList args = {QLatin1String("convert"), inputFilePath,
+                      QLatin1String("-o"),      outputFile,
+                      QLatin1String("-m"),      mutoolExecutablePath};
   // 开始执行命令，转换完成后发送信号，根据转换结果更新第三页的页面
   emit conversionFinished(process.execute(caj2pdfExecutablePath, args) == 0,
                           inputFilePath);

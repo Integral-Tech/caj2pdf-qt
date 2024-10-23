@@ -27,9 +27,9 @@ void CAJ2PDF::handlePage1SelectInputButton() {
                       inputFilesVec.end());
   inputFiles = inputFilesVec.toList();
   // 更新文本框
-  QString inputFilesText = tr("");
+  QString inputFilesText;
   for (QString str : inputFiles) {
-    inputFilesText = inputFilesText + str + "\n";
+    inputFilesText += str + "\n";
   }
   inputTextBrowser->setText(inputFilesText);
   outputTextBrowser->setText(inputFilesText);
